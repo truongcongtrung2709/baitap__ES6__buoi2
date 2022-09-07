@@ -108,6 +108,24 @@ function tryGlassesOn(...glasses) {
   }, "");
   dom("#avatar").innerHTML = html;
 }
+function glassesInfo(...glasses) {
+  const html = glasses.reduce((result, item) => {
+    return (
+      result +
+      `
+        <p>${item.name} - ${item.brand} (${item.color})</p>
+        <div class="row">
+        <span class="col-2 bg-danger">$${item.price}</span>
+        <span class="col-10 text-success">Stocking</span>
+        </div>
+        <br />
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit consequatur soluta ad aut laborum amet.</p>
+      `
+    );
+  }, "");
+  dom("#glassesInfo").style.display = "block";
+  dom("#glassesInfo").innerHTML = html;
+}
 
 dom("#vglassesList").addEventListener("click", (evt) => {
   let id = evt.target.getAttribute("data-id");
@@ -115,6 +133,7 @@ dom("#vglassesList").addEventListener("click", (evt) => {
     return glasses.id === id;
   });
   tryGlassesOn(glasses);
+  glassesInfo(glasses);
 });
 
 function dom(selector) {
