@@ -102,7 +102,7 @@ function tryGlassesOn(...glasses) {
     return (
       result +
       `
-        <img src="${item.virtualImg}" alt="Glasses Imgage" />
+        <img id="img-glasses" src="${item.virtualImg}" alt="Glasses Imgage" />
       `
     );
   }, "");
@@ -126,7 +126,6 @@ function glassesInfo(...glasses) {
   dom("#glassesInfo").style.display = "block";
   dom("#glassesInfo").innerHTML = html;
 }
-
 dom("#vglassesList").addEventListener("click", (evt) => {
   let id = evt.target.getAttribute("data-id");
   let glasses = dataGlasses.find((glasses) => {
@@ -134,6 +133,15 @@ dom("#vglassesList").addEventListener("click", (evt) => {
   });
   tryGlassesOn(glasses);
   glassesInfo(glasses);
+});
+dom("#btn-bf-at").addEventListener("click", (evt) => {
+  let type = evt.target.getAttribute("data-type");
+  console.log(type);
+  if (type === "before") {
+    dom("#img-glasses").style.display = "none";
+  } else if (type === "after") {
+    dom("#img-glasses").style.display = "block";
+  }
 });
 
 function dom(selector) {
